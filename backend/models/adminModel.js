@@ -33,6 +33,26 @@ const adminSchema = new mongoose.Schema({
   },
 });
 
+adminSchema.methods.generateToken = function () {
+  const token = jwt.sign(
+    { id: this._id, email: this.email },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: "24hr",
+    }
+  );
+  return token;
+};
+
+adminSchema.methods.comparePasswords = async function (password) {
+  return await bcrypt.compare(password, this.password);
+};
+
+adminSchema.statics.hashPassword = async function (password) {
+  const saltRound = parseInt(process.env.SALT_ROUND);
+  return await bcrypt.hash(password, saltRound);
+};
+
 const Admin = mongoose.model("Admin", adminSchema);
 
 module.exports = Admin;

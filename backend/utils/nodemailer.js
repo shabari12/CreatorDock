@@ -1,16 +1,14 @@
 const nodemailer = require("nodemailer");
 const dotenv = require("dotenv");
 
-
 dotenv.config();
-
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
-  secure: false, 
+  secure: false,
   auth: {
-    user: process.env.EMAIL_USER, 
+    user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS, // Sender password from the .env file
   },
 });
@@ -20,7 +18,7 @@ async function sendEmail(receivermail, otp) {
   try {
     // Send mail with the defined transporter
     const info = await transporter.sendMail({
-      from: `"Kudos 👻" <${process.env.EMAIL_SENDER}>`, // Sender address
+      from: `"CreatorDock 👻" <${process.env.EMAIL_SENDER}>`, // Sender address
       to: receivermail, // Receiver's email address
       subject: "Verify Your Sign-Up Process", // Subject line
       text: `Your OTP to Sign Up is ${otp}`, // Plain text body
