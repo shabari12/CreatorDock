@@ -21,7 +21,8 @@ const videoSchema = new mongoose.Schema(
       enum: ["pending", "approved", "rejected"],
       default: "pending",
     }, // Approval status
-    youtubeVideoId: { type: String }, 
+    youtubeVideoId: { type: String },
+    
   },
   { timestamps: true }
 );

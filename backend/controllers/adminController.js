@@ -60,7 +60,7 @@ const verifyOtp = async (req, res) => {
   });
   await newAdmin.save();
   const token = newAdmin.generateToken();
-  return res.status(200).json({ token });
+  return res.status(200).json({ newAdmin, token });
 };
 
 const loginAdmin = async (req, res) => {
@@ -78,6 +78,7 @@ const loginAdmin = async (req, res) => {
     return res.status(400).json({ msg: "Invalid credentials" });
   }
   const token = admin.generateToken();
+  res.cookie(token);
   res.status(200).json({ admin, token });
 };
 

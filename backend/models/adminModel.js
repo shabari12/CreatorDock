@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const Space = require("./spaceModel");
 
 const adminSchema = new mongoose.Schema({
   username: {
@@ -17,20 +18,12 @@ const adminSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  editors: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Editor",
-    },
-  ],
-  channel: {
+  
+  spaces: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Channel",
-  },
-  videos: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Video",
-  },
+    ref: "Space",
+  }],
+ 
 });
 
 adminSchema.methods.generateToken = function () {

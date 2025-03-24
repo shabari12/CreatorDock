@@ -58,7 +58,8 @@ const verifyOtp = async (req, res) => {
   });
   await neweditor.save();
   const token = neweditor.generateToken();
-  return res.status(200).json({ token });
+
+  return res.status(200).json({ neweditor, token });
 };
 const loginEditor = async (req, res) => {
   const errors = validationResult(req);
@@ -75,6 +76,7 @@ const loginEditor = async (req, res) => {
     return res.status(400).json({ msg: "Invalid credentials" });
   }
   const token = editor.generateToken();
+  res.cookie(token);
   res.status(200).json({ editor, token });
 };
 

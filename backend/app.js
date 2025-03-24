@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 const connectToDB = require("./db/db");
 const adminRoutes = require("./routes/admin");
 const editorRoutes = require("./routes/editor");
+const spaceRoutes = require("./routes/space");
 
 // Middleware
 app.use(cors());
@@ -15,8 +16,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-app.use("/admin", adminRoutes); 
-app.use("/editor", editorRoutes); 
+app.use("/admin", adminRoutes);
+app.use("/admin-space", spaceRoutes);
+app.use("/editor", editorRoutes);
 
 // Connect to the database
 connectToDB();
