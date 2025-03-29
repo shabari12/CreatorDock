@@ -17,11 +17,31 @@ router.post(
   spaceController.createSpace
 );
 
+router.get(
+  "/get-spaces",
+  authMiddleware.adminMiddleware,
+  spaceController.getSpaces
+);
+
 router.post(
   "/add-editor",
   authMiddleware.adminMiddleware,
   [body("editorEmail").isEmail(), body("spaceId").isMongoId()],
   spaceController.addEditor
+);
+
+router.post(
+  "/remove-editor",
+  authMiddleware.adminMiddleware,
+  [body("editorEmail").isEmail(), body("spaceId").isMongoId()],
+  spaceController.removeEditor
+);
+
+router.post(
+  "/get-editors",
+  authMiddleware.adminMiddleware,
+  [body("spaceId").isMongoId()],
+  spaceController.getEditors
 );
 
 module.exports = router;
