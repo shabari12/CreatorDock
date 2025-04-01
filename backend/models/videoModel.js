@@ -4,11 +4,11 @@ const videoSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
     description: { type: String },
-    thumbnail: { type: String, required: true }, // Thumbnail URL
+    thumbnailUrl: { type: String, required: true }, // Thumbnail URL
     videoUrl: { type: String, required: true }, // Video file URL
-    channel: {
+    space: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Channel",
+      ref: "Space",
       required: true,
     },
     uploadedBy: {

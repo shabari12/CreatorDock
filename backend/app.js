@@ -8,6 +8,7 @@ const connectToDB = require("./db/db");
 const adminRoutes = require("./routes/admin");
 const editorRoutes = require("./routes/editor");
 const spaceRoutes = require("./routes/space");
+const videoRoutes = require("./routes/videos");
 
 // Middleware
 app.use(cors());
@@ -19,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/admin", adminRoutes);
 app.use("/admin-space", spaceRoutes);
 app.use("/editor", editorRoutes);
-
+app.use("/video", videoRoutes);
 // Connect to the database
 connectToDB();
 

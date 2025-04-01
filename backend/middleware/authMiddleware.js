@@ -29,11 +29,11 @@ module.exports.editorMiddleware = async (req, res, next) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const editor = await editorModel.findById(decoded.id);
-    req.editor = editor;
-    next();
     if (!editor) {
       return res.status(404).json({ msg: "Editor not found" });
     }
+    req.editor = editor;
+    next(); // Call next() only if the editor exists
   } catch (error) {
     return res.status(500).json({ msg: error.message });
   }
