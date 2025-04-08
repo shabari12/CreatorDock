@@ -1,4 +1,5 @@
-require("dotenv").config();
+const dotenv = require("dotenv");
+dotenv.config();
 const { createClient } = require("@supabase/supabase-js");
 
 const supabase = createClient(
@@ -11,9 +12,15 @@ const uploadToSupabase = async (file, userId, type) => {
 
   const { data, error } = await supabase.storage
     .from(process.env.SUPABASE_BUCKET)
-    .upload(filePath, file.buffer, { contentType: file.mimetype });
+    .upload(filePath, file.buffer, {
+      contentType: file.mimetype,
+      upsert: false, // Prevent overwriting existing files
+    });
 
-  if (error) throw new Error(error.message);
+  if (error) {
+    console.error("Supabase Upload Error:", error); // Log detailed error
+    throw new Error(error.message);
+  }
 
   return `${process.env.SUPABASE_URL}/storage/v1/object/public/${process.env.SUPABASE_BUCKET}/${filePath}`;
 };

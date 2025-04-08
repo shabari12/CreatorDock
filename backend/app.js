@@ -10,18 +10,16 @@ const editorRoutes = require("./routes/editor");
 const spaceRoutes = require("./routes/space");
 const videoRoutes = require("./routes/videos");
 
-// Middleware
 app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Routes
 app.use("/admin", adminRoutes);
 app.use("/admin-space", spaceRoutes);
 app.use("/editor", editorRoutes);
 app.use("/video", videoRoutes);
-// Connect to the database
+
 connectToDB();
 
 module.exports = app;
