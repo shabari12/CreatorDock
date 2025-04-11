@@ -23,7 +23,7 @@ const uploadVideo = async (req, res) => {
     }
 
     if (errors.length > 0) {
-      console.error("Validation Errors:", errors); // Log validation errors
+      console.error("Validation Errors:", errors);
       return res.status(400).json({ errors });
     }
 
@@ -50,6 +50,9 @@ const uploadVideo = async (req, res) => {
 
     await newVideo.save();
 
+    space.videos.push(newVideo._id);
+    await space.save();
+
     return res.status(201).json({
       message: "Video uploaded successfully",
       video: newVideo,
@@ -60,4 +63,59 @@ const uploadVideo = async (req, res) => {
   }
 };
 
-module.exports = { uploadVideo };
+const getVideo = async (req, res) => {
+  const videoId = req.params.videoId;
+  if (!videoId) {
+    return res.status(400).json({ error: "Video ID is required" });
+  }
+  try {
+    const response = await Video.findById(videoId);
+    if (!response) {
+      return res.status(404).json({ error: "Video not found" });
+    }
+    return res.status(200).json({ video: response });
+  } catch (err) {
+    console.error("Error fetching video:", err);
+    return res.status(500).json({ error: err.message });
+  }
+};
+const getAllVideos = async (req, res) => {
+  const spaceId = req.params.spaceId;
+  if (!spaceId) {
+    return res.status(400).json({ error: "Space ID is required" });
+  }
+  try {
+    const response = await Video.find({ space: spaceId });
+    if (!response) {
+      return res.status(404).json({ error: "No videos found for this space" });
+    }
+    return res.status(200).json({ videos: response });
+  } catch (err) {
+    console.error("Error fetching videos:", err);
+    return res.status(500).json({ error: err.message });
+  }
+};
+const updateVideo = async (req, res) => {};
+const deleteVideo = async (req, res) => {
+  const videoId = req.params.videoId;
+  if (!videoId) {
+    return res.status(400).json({ error: "Video ID is required" });
+  }
+  try {
+    const video = await Video.findByIdAndDelete(videoId);
+    if (!video) {
+      return res.status(404).json({ error: "Video not found" });
+    }
+  } catch (err) {
+    console.error("Error deleting video:", err);
+    return res.status(500).json({ error: err.message });
+  }
+};
+
+module.exports = {
+  uploadVideo,
+  getVideo,
+  getAllVideos,
+  updateVideo,
+  deleteVideo,
+};
