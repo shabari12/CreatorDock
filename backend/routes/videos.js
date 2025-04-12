@@ -60,7 +60,17 @@ router.post(
   },
   uploadVideo
 );
-router.post("update-video/:videoId", editorOrAdminMiddleware, updateVideo);
+router.post(
+  "/update-video/:videoId", 
+  editorOrAdminMiddleware,
+  uploadFields,
+  (req, res, next) => {
+    console.log("Multer Middleware Processed Files:", req.files);
+    console.log("Request Body After Multer:", req.body);
+    next();
+  },
+  updateVideo
+);
 router.post("/delete-video/:videoId", editorOrAdminMiddleware, deleteVideo);
 
 router.get("/get-video/:videoId", editorOrAdminMiddleware, getVideo);

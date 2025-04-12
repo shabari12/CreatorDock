@@ -4,8 +4,8 @@ const videoSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
     description: { type: String },
-    thumbnailUrl: { type: String, required: true }, // Thumbnail URL
-    videoUrl: { type: String, required: true }, // Video file URL
+    thumbnailUrl: { type: String, required: true }, 
+    videoUrl: { type: String, required: true }, 
     space: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Space",
@@ -15,12 +15,12 @@ const videoSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Editor",
       required: true,
-    }, // Editor who uploaded
+    }, 
     status: {
       type: String,
       enum: ["pending", "approved", "rejected"],
       default: "pending",
-    }, // Approval status
+    }, 
     youtubeVideoId: { type: String },
     
   },

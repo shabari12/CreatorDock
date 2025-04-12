@@ -5,7 +5,7 @@ import os
 import random
 import sys
 import time
-import http.client  # Updated import
+import http.client  
 
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
@@ -32,14 +32,12 @@ RETRIABLE_STATUS_CODES = [500, 502, 503, 504]
 
 CLIENT_SECRETS_FILE = "client_secrets.json"
 
-# This OAuth 2.0 access scope allows an application to upload files to the
-# authenticated user's YouTube channel, but doesn't allow other types of access.
+
 YOUTUBE_UPLOAD_SCOPE = "https://www.googleapis.com/auth/youtube.upload"
 YOUTUBE_API_SERVICE_NAME = "youtube"
 YOUTUBE_API_VERSION = "v3"
 
-# This variable defines a message to display if the CLIENT_SECRETS_FILE is
-# missing.
+
 MISSING_CLIENT_SECRETS_MESSAGE = """
 WARNING: Please configure OAuth 2.0
 
@@ -90,28 +88,17 @@ def initialize_upload(youtube, options):
     )
   )
 
-  # Call the API's videos.insert method to create and upload the video.
+
   insert_request = youtube.videos().insert(
     part=",".join(body.keys()),
     body=body,
-    # The chunksize parameter specifies the size of each chunk of data, in
-    # bytes, that will be uploaded at a time. Set a higher value for
-    # reliable connections as fewer chunks lead to faster uploads. Set a lower
-    # value for better recovery on less reliable connections.
-    #
-    # Setting "chunksize" equal to -1 in the code below means that the entire
-    # file will be uploaded in a single HTTP request. (If the upload fails,
-    # it will still be retried where it left off.) This is usually a best
-    # practice, but if you're using Python older than 2.6 or if you're
-    # running on App Engine, you should set the chunksize to something like
-    # 1024 * 1024 (1 megabyte).
+
     media_body=MediaFileUpload(options.file, chunksize=-1, resumable=True)
   )
 
   resumable_upload(insert_request)
 
-# This method implements an exponential backoff strategy to resume a
-# failed upload.
+
 def resumable_upload(insert_request):
   response = None
   error = None

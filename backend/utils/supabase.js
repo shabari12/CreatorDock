@@ -25,4 +25,18 @@ const uploadToSupabase = async (file, userId, type) => {
   return `${process.env.SUPABASE_URL}/storage/v1/object/public/${process.env.SUPABASE_BUCKET}/${filePath}`;
 };
 
-module.exports = { uploadToSupabase };
+const deleteFromSupabase = async (fileUrl) => {
+  const filePath = fileUrl.replace(
+    `${process.env.SUPABASE_URL}/storage/v1/object/public/${process.env.SUPABASE_BUCKET}/`,
+    ""
+  ); // Simplified path extraction
+  const { error } = await supabase.storage
+    .from(process.env.SUPABASE_BUCKET)
+    .remove([filePath]);
+  if (error) {
+    console.error("Error deleting file from Supabase:", error);
+    throw new Error("Failed to delete file from Supabase");
+  }
+};
+
+module.exports = { deleteFromSupabase, uploadToSupabase };
