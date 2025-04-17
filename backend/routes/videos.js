@@ -8,6 +8,7 @@ const {
   getAllVideos,
   updateVideo,
   deleteVideo,
+  uploadToYoutube,
 } = require("../controllers/videoController");
 const {
   editorMiddleware,
@@ -25,29 +26,7 @@ const uploadFields = upload.fields([
   { name: "thumbnail", maxCount: 1 },
 ]);
 
-router.use((req, res, next) => {
-  console.log("Headers:", req.headers);
-  console.log("Content-Type:", req.headers["content-type"]);
 
-  if (req.method !== "GET") {
-    if (!req.headers["content-type"]) {
-      console.error("Missing Content-Type header");
-      return res.status(400).json({
-        error:
-          "Content-Type header is missing. Ensure you are sending multipart/form-data.",
-      });
-    }
-    if (!req.is("multipart/form-data")) {
-      console.error("Invalid Content-Type:", req.headers["content-type"]);
-      return res.status(400).json({
-        error:
-          "Invalid Content-Type. Content-Type must be multipart/form-data.",
-      });
-    }
-  }
-
-  next();
-});
 
 router.post(
   "/upload",
@@ -75,5 +54,6 @@ router.post("/delete-video/:videoId", editorOrAdminMiddleware, deleteVideo);
 
 router.get("/get-video/:videoId", editorOrAdminMiddleware, getVideo);
 router.get("/getall-videos/:spaceId", editorOrAdminMiddleware, getAllVideos);
+router.post("/uploadtoyoutube/:videoId", adminMiddleware, uploadToYoutube);
 
 module.exports = router;

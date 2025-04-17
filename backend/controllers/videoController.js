@@ -1,13 +1,23 @@
 const Video = require("../models/videoModel");
 const { uploadToSupabase, deleteFromSupabase } = require("../utils/supabase"); // Import delete function
 const Space = require("../models/spaceModel");
+const { youtubeUploader } = require("../utils/youtube"); // Import YouTube upload function
+const User = require("../models/userModel"); // Import User model
 
 const uploadVideo = async (req, res) => {
   try {
     console.log("Request Body:", req.body); // Log request body
     console.log("Request Files:", req.files); // Log uploaded files
 
-    const { title, description, spaceId } = req.body;
+    const {
+      title,
+      description,
+      spaceId,
+      status,
+
+      keywords,
+      privacystatus,
+    } = req.body;
     const files = req.files;
     const editorId = req.editor?.id;
 
@@ -46,6 +56,9 @@ const uploadVideo = async (req, res) => {
       thumbnailUrl,
       space: spaceId,
       uploadedBy: editorId,
+      status: status || "pending", // Default to "pending" if not provided
+      keywords: keywords ? keywords.split(",").map((kw) => kw.trim()) : [], // Split keywords by comma
+      privacystatus: privacystatus || "private", // Default to "public" if not provided
     });
 
     await newVideo.save();
@@ -179,10 +192,59 @@ const deleteVideo = async (req, res) => {
   }
 };
 
+const uploadToYoutube = async (req, res) => {
+  const videoId = req.params.videoId;
+  const userId = req.user.id; // Assume user is authenticated and their ID is available
+
+  if (!videoId) {
+    return res.status(400).json({ error: "Video ID is required" });
+  }
+
+  try {
+    const user = await User.findById(userId);
+    if (!user || !user.youtubeCredentials.refreshToken) {
+      return res.status(400).json({ error: "YouTube credentials not found" });
+    }
+
+    const videodata = await Video.findById(videoId);
+    if (!videodata) {
+      return res.status(404).json({ error: "Video not found" });
+    }
+
+    youtubeUploader(
+      videodata.videoUrl,
+      videodata.thumbnailUrl,
+      videodata.title,
+      videodata.description,
+      videodata.category,
+      videodata.keywords,
+      videodata.privacystatus,
+      user.youtubeCredentials.clientId,
+      user.youtubeCredentials.clientSecret,
+      user.youtubeCredentials.refreshToken
+    )
+      .then((response) => {
+        console.log("YouTube upload response:", response);
+        return res.status(200).json({
+          message: "Video uploaded to YouTube successfully",
+          youtubeVideoId: response.id,
+        });
+      })
+      .catch((error) => {
+        console.error("Error uploading to YouTube:", error);
+        return res.status(500).json({ error: error.message });
+      });
+  } catch (Error) {
+    console.error("Error uploading to YouTube:", Error);
+    return res.status(500).json({ error: Error.message });
+  }
+};
+
 module.exports = {
   uploadVideo,
   getVideo,
   getAllVideos,
   updateVideo,
   deleteVideo,
+  uploadToYoutube,
 };

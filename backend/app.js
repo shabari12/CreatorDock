@@ -9,6 +9,7 @@ const adminRoutes = require("./routes/admin");
 const editorRoutes = require("./routes/editor");
 const spaceRoutes = require("./routes/space");
 const videoRoutes = require("./routes/videos");
+const authRoutes = require("./routes/authRoutes");
 
 app.use(cors());
 app.use(cookieParser());
@@ -19,6 +20,7 @@ app.use("/admin", adminRoutes);
 app.use("/admin-space", spaceRoutes);
 app.use("/editor", editorRoutes);
 app.use("/video", videoRoutes);
+app.use("/api/auth", authRoutes); // Add the auth routes
 
 connectToDB();
 
