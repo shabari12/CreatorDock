@@ -11,13 +11,13 @@ module.exports.adminMiddleware = async (req, res, next) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const admin = await adminModel.findById(decoded.id);
-    req.admin = admin;
-    next();
     if (!admin) {
       return res.status(404).json({ msg: "Admin not found" });
     }
+    req.admin = admin; // Assign admin to req.admin
+    next(); // Call next() only after ensuring admin exists
   } catch (error) {
-    return res.status(500).json("Admin not foundddd");
+    return res.status(500).json({ msg: error.message });
   }
 };
 

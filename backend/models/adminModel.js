@@ -18,12 +18,18 @@ const adminSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  
-  spaces: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Space",
-  }],
- 
+
+  spaces: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Space",
+    },
+  ],
+  youtubeCredentials: {
+    clientId: { type: String },
+    clientSecret: { type: String },
+    refreshToken: { type: String },
+  },
 });
 
 adminSchema.methods.generateToken = function () {

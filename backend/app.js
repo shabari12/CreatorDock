@@ -20,7 +20,7 @@ app.use("/admin", adminRoutes);
 app.use("/admin-space", spaceRoutes);
 app.use("/editor", editorRoutes);
 app.use("/video", videoRoutes);
-app.use("/api/auth", authRoutes); // Add the auth routes
+app.use("/api/Oauth", authRoutes); // Add the auth routes
 
 connectToDB();
 

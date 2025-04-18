@@ -1,13 +1,14 @@
 const Video = require("../models/videoModel");
-const { uploadToSupabase, deleteFromSupabase } = require("../utils/supabase"); // Import delete function
+const { uploadToSupabase, deleteFromSupabase } = require("../utils/supabase");
 const Space = require("../models/spaceModel");
-const { youtubeUploader } = require("../utils/youtube"); // Import YouTube upload function
-const User = require("../models/userModel"); // Import User model
+const { youtubeUploader } = require("../utils/youtube");
+const User = require("../models/userModel");
+const Admin = require("../models/adminModel");
 
 const uploadVideo = async (req, res) => {
   try {
-    console.log("Request Body:", req.body); // Log request body
-    console.log("Request Files:", req.files); // Log uploaded files
+    console.log("Request Body:", req.body);
+    console.log("Request Files:", req.files);
 
     const {
       title,
@@ -108,13 +109,22 @@ const getAllVideos = async (req, res) => {
     return res.status(500).json({ error: err.message });
   }
 };
+
 const updateVideo = async (req, res) => {
   const videoId = req.params.videoId;
   if (!videoId) {
     return res.status(400).json({ error: "Video ID is required" });
   }
   try {
-    const { title, description } = req.body;
+    const {
+      title,
+      description,
+
+      status,
+
+      keywords,
+      privacystatus,
+    } = req.body;
     const files = req.files;
     const editorId = req.editor?.id;
 
@@ -130,6 +140,15 @@ const updateVideo = async (req, res) => {
     }
     if (description) {
       updateData.description = description;
+    }
+    if (status) {
+      updateData.status = status;
+    }
+    if (keywords) {
+      updateData.keywords = keywords.split(",").map((kw) => kw.trim());
+    }
+    if (privacystatus) {
+      updateData.privacystatus = privacystatus;
     }
     if (files && files.video && files.video[0]) {
       // Delete old video file from Supabase
@@ -194,15 +213,15 @@ const deleteVideo = async (req, res) => {
 
 const uploadToYoutube = async (req, res) => {
   const videoId = req.params.videoId;
-  const userId = req.user.id; // Assume user is authenticated and their ID is available
+  const adminid = req.admin.id;
 
   if (!videoId) {
     return res.status(400).json({ error: "Video ID is required" });
   }
 
   try {
-    const user = await User.findById(userId);
-    if (!user || !user.youtubeCredentials.refreshToken) {
+    const admin = await Admin.findById(adminid);
+    if (!admin || !admin.youtubeCredentials.refreshToken) {
       return res.status(400).json({ error: "YouTube credentials not found" });
     }
 
@@ -219,12 +238,17 @@ const uploadToYoutube = async (req, res) => {
       videodata.category,
       videodata.keywords,
       videodata.privacystatus,
-      user.youtubeCredentials.clientId,
-      user.youtubeCredentials.clientSecret,
-      user.youtubeCredentials.refreshToken
+      admin.youtubeCredentials.clientId,
+      admin.youtubeCredentials.clientSecret,
+      admin.youtubeCredentials.refreshToken
     )
-      .then((response) => {
+      .then(async (response) => {
         console.log("YouTube upload response:", response);
+        const updatedVideodata = await Video.findByIdAndUpdate(
+          videoId,
+          { youtubeVideoId: response.id },
+          { new: true, runValidators: true }
+        );
         return res.status(200).json({
           message: "Video uploaded to YouTube successfully",
           youtubeVideoId: response.id,
