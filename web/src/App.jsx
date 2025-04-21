@@ -1,12 +1,15 @@
-import React from 'react'
-import { MacbookScroll } from './components/ui/macbook-scroll'
+import React from "react";
+
+import Landing from "./pages/Landing";
+
 
 const App = () => {
   return (
     <div>
-      <MacbookScroll/>
+      
+      <Landing />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

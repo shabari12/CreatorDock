@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { cn } from "../../lib/Utils";
 import {
   IconBrightnessDown,
