@@ -1,0 +1,22 @@
+{
+  "name": "new-folder-(9)",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": "true",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace backend\" \"npm run dev --workspace web\"",
+    "start:web": "npm run dev --workspace web",
+    "start:backend": "npm run dev --workspace backend"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "workspaces": [
+    "backend",
+    "web"
+  ],
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
