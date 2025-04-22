@@ -12,6 +12,9 @@ import {
 } from "../components/common/resizable-navbar";
 import { MacbookScroll } from "../components/ui/macbook-scroll";
 import { HeroSectionOne } from "../components/ui/Hero";
+import { BentoGrid, BentoGridItem } from "../components/common/bento-grid";
+import { BentoGridThirdDemo } from "../components/ui/Bento";
+import { ColourfulText } from "../components/common/colourfull-text";
 
 const Landing = () => {
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
@@ -58,7 +61,9 @@ const Landing = () => {
           </MobileNavMenu>
         </MobileNav>
       </Navbar>
-      <HeroSectionOne/>
+      <HeroSectionOne />
+      <BentoGridThirdDemo />
+      
       <MacbookScroll />
     </div>
   );

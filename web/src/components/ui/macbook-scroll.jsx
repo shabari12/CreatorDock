@@ -22,6 +22,10 @@ import { IconWorld } from "@tabler/icons-react";
 import { IconCommand } from "@tabler/icons-react";
 import { IconCaretLeftFilled } from "@tabler/icons-react";
 import { IconCaretDownFilled } from "@tabler/icons-react";
+import { ColourfulText } from "../common/colourfull-text";
+import ShinyText from '../common/ShinyText';
+  
+
 
 export const MacbookScroll = ({ src, showGradient, title, badge }) => {
   const ref = useRef(null);
@@ -56,16 +60,21 @@ export const MacbookScroll = ({ src, showGradient, title, badge }) => {
   return (
     <div
       ref={ref}
-      className="flex min-h-[200vh] shrink-0 scale-[0.35] transform flex-col items-center justify-start py-0 [perspective:800px] sm:scale-50 md:scale-100 md:py-80"
+      className="flex min-h-[150vh] shrink-0 scale-[0.35] transform flex-col items-center justify-start py-0 [perspective:800px] sm:scale-50 md:scale-100 md:py-40"
     >
       <motion.h2
         style={{
           translateY: textTransform,
           opacity: textOpacity,
         }}
-        className="mb-20 text-center text-3xl font-bold text-neutral-800 dark:text-white"
+        className="mb-20 text-center text-4xl font-bold text-slate-700 dark:text-white"
       >
-        {title || <span>What we do?</span>}
+        {title || (
+         
+            
+            <ShinyText text="Transforming Workspaces with Innovative dashboard" disabled={false} speed={3} className='custom-class' />
+         
+        )}
       </motion.h2>
       {/* Lid */}
       <Lid
