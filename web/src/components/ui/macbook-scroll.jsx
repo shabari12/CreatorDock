@@ -23,9 +23,7 @@ import { IconCommand } from "@tabler/icons-react";
 import { IconCaretLeftFilled } from "@tabler/icons-react";
 import { IconCaretDownFilled } from "@tabler/icons-react";
 import { ColourfulText } from "../common/colourfull-text";
-import ShinyText from '../common/ShinyText';
-  
-
+import ShinyText from "../common/ShinyText";
 
 export const MacbookScroll = ({ src, showGradient, title, badge }) => {
   const ref = useRef(null);
@@ -52,7 +50,7 @@ export const MacbookScroll = ({ src, showGradient, title, badge }) => {
     [0, 0.3],
     [0.6, isMobile ? 1 : 1.5]
   );
-  const translate = useTransform(scrollYProgress, [0, 1], [0, 1500]);
+  const translate = useTransform(scrollYProgress, [0, 1], [0, 2000]); // Increased translate value
   const rotate = useTransform(scrollYProgress, [0.1, 0.12, 0.3], [-28, -28, 0]);
   const textTransform = useTransform(scrollYProgress, [0, 0.3], [0, 100]);
   const textOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
@@ -60,7 +58,7 @@ export const MacbookScroll = ({ src, showGradient, title, badge }) => {
   return (
     <div
       ref={ref}
-      className="flex min-h-[150vh] shrink-0 scale-[0.35] transform flex-col items-center justify-start py-0 [perspective:800px] sm:scale-50 md:scale-100 md:py-40"
+      className="flex min-h-[250vh] shrink-0 scale-[0.35] transform flex-col items-center justify-start py-0 [perspective:800px] sm:scale-50 md:scale-100 md:py-40"
     >
       <motion.h2
         style={{
@@ -70,10 +68,12 @@ export const MacbookScroll = ({ src, showGradient, title, badge }) => {
         className="mb-20 text-center text-4xl font-bold text-slate-700 dark:text-white"
       >
         {title || (
-         
-            
-            <ShinyText text="Transforming Workspaces with Innovative dashboard" disabled={false} speed={3} className='custom-class' />
-         
+          <ShinyText
+            text="Transforming Workspaces with Innovative dashboard"
+            disabled={false}
+            speed={3}
+            className="custom-class"
+          />
         )}
       </motion.h2>
       {/* Lid */}
