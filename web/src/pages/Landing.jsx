@@ -16,7 +16,8 @@ import { BentoGrid, BentoGridItem } from "../components/common/bento-grid";
 import { BentoGridThirdDemo } from "../components/ui/Bento";
 import { ColourfulText } from "../components/common/colourfull-text";
 import Footer from "../components/common/Footer";
-import { Globe } from "../components/ui/globe";
+
+import { WorldMap } from "../components/ui/world-map";
 
 const Landing = () => {
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
@@ -97,9 +98,12 @@ const Landing = () => {
       </Navbar>
       <HeroSectionOne />
       <BentoGridThirdDemo />
-      <MacbookScroll />
-      <Globe globeConfig={globeConfig} data={data} />
+      <div>
+        <MacbookScroll />
+        </div>
+        <WorldMap />
       <Footer />
+      
     </div>
   );
 };
