@@ -60,7 +60,7 @@ export function WorldMap({
   };
 
   return (
-    <div className="flex items-center justify-center h-screen mt-100">
+    <div className="flex items-center justify-center h-screen mt-200">
       {" "}
       {/* Added mt-10 for spacing */}
       <ShinyText

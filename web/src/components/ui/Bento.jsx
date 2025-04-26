@@ -11,6 +11,7 @@ import {
 } from "@tabler/icons-react";
 import { motion } from "motion/react";
 import YtImage from "../../assets/YTlogo.png";
+import MyImg from "../../assets/Myimg.jpg";
 export function BentoGridThirdDemo() {
   return (
     <BentoGrid className="max-w-4xl mx-auto md:auto-rows-[20rem]">
@@ -146,9 +147,8 @@ const SkeletonThree = () => {
       }}
       className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] rounded-lg bg-dot-black/[0.2] flex-col space-y-2"
       style={{
-        background:
-          "linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)",
-        backgroundSize: "400% 400%",
+        backgroundImage: `url('https://media.wired.com/photos/5a73cb708407557df12ab978/16:9/w_3600,h_2025,c_limit/ideas_ai_challenges-01.jpg')`,
+        backgroundSize: "100% 100%",
       }}
     >
       <motion.div className="h-full w-full rounded-lg"></motion.div>
@@ -276,22 +276,22 @@ const SkeletonFive = () => {
         className="flex flex-row rounded-2xl border border-neutral-100 dark:border-white/[0.2] p-2  items-start space-x-2 bg-white dark:bg-black"
       >
         <img
-          src="https://pbs.twimg.com/profile_images/1417752099488636931/cs2R59eW_400x400.jpg"
+          src={MyImg}
           alt="avatar"
           height="100"
           width="100"
           className="rounded-full h-10 w-10"
         />
         <p className="text-xs text-neutral-500">
-          There are a lot of cool framerworks out there like React, Angular,
-          Vue, Svelte that can make your life ....
+          There are a lot of cool features out there that can make your life
+          Easy and Simple ....
         </p>
       </motion.div>
       <motion.div
         variants={variantsSecond}
         className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2 items-center justify-end space-x-2 w-3/4 ml-auto bg-white dark:bg-black"
       >
-        <p className="text-xs text-neutral-500">Use PHP.</p>
+        <p className="text-xs text-neutral-500">Use Creator Dock.</p>
         <div className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 shrink-0" />
       </motion.div>
     </motion.div>
@@ -325,7 +325,8 @@ const items = [
     title: "AI-Powered",
     description: (
       <span className="text-sm">
-       In Future we will Leverage AI to enhance your video content with smart suggestions.
+        In Future we will Leverage AI to enhance your video content with smart
+        suggestions.
       </span>
     ),
     header: <SkeletonThree />,

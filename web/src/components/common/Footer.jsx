@@ -1,28 +1,26 @@
 import React from "react";
+import MainLogo from "../../assets/MainLogo.PNG";
 
 const Footer = () => {
   return (
     <div className="">
-      <section class="py-10 bg-gray-50 sm:pt-16 lg:pt-24 mt-auto">
+      <section class="py-10 bg-white sm:pt-16 lg:pt-24 mt-auto">
         <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
           <div class="grid grid-cols-2 md:col-span-3 lg:grid-cols-6 gap-y-16 gap-x-12">
             <div class="col-span-2 md:col-span-3 lg:col-span-2 lg:pr-8">
-              <img
-                class="w-auto h-9"
-                src="https://cdn.rareblocks.xyz/collection/celebration/images/logo.svg"
-                alt=""
-              />
+              <img class="w-auto h-9" src={MainLogo} alt="Creator Dock Logo" />
 
               <p class="text-base leading-relaxed text-gray-600 mt-7">
-                Amet minim mollit non deserunt ullamco est sit aliqua dolor do
-                amet sint. Velit officia consequat duis enim velit mollit.
+                Creator Dock is your all-in-one platform to edit, manage, and
+                upload YouTube videos seamlessly. Empowering creators to focus
+                on creativity while we handle the rest.
               </p>
 
               <ul class="flex items-center space-x-3 mt-9">
                 <li>
                   <a
                     href="#"
-                    title=""
+                    title="Twitter"
                     class="flex items-center justify-center text-white transition-all duration-200 bg-gray-800 rounded-full w-7 h-7 hover:bg-blue-600 focus:bg-blue-600"
                   >
                     <svg
@@ -35,11 +33,10 @@ const Footer = () => {
                     </svg>
                   </a>
                 </li>
-
                 <li>
                   <a
                     href="#"
-                    title=""
+                    title="Facebook"
                     class="flex items-center justify-center text-white transition-all duration-200 bg-gray-800 rounded-full w-7 h-7 hover:bg-blue-600 focus:bg-blue-600"
                   >
                     <svg
@@ -52,11 +49,10 @@ const Footer = () => {
                     </svg>
                   </a>
                 </li>
-
                 <li>
                   <a
                     href="#"
-                    title=""
+                    title="Instagram"
                     class="flex items-center justify-center text-white transition-all duration-200 bg-gray-800 rounded-full w-7 h-7 hover:bg-blue-600 focus:bg-blue-600"
                   >
                     <svg
@@ -71,11 +67,10 @@ const Footer = () => {
                     </svg>
                   </a>
                 </li>
-
                 <li>
                   <a
-                    href="#"
-                    title=""
+                    href="https://github.com/shabari12/CreatorDock"
+                    title="Instagram"
                     class="flex items-center justify-center text-white transition-all duration-200 bg-gray-800 rounded-full w-7 h-7 hover:bg-blue-600 focus:bg-blue-600"
                   >
                     <svg
@@ -97,51 +92,44 @@ const Footer = () => {
 
             <div>
               <p class="text-sm font-semibold tracking-widest text-gray-400 uppercase">
-                Company
+                Platform
               </p>
 
               <ul class="mt-6 space-y-4">
                 <li>
                   <a
                     href="#"
-                    title=""
+                    title="How it Works"
                     class="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
                   >
-                    {" "}
-                    About{" "}
+                    How it Works
                   </a>
                 </li>
-
                 <li>
                   <a
                     href="#"
-                    title=""
+                    title="Features"
                     class="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
                   >
-                    {" "}
-                    Features{" "}
+                    Features
                   </a>
                 </li>
-
                 <li>
                   <a
                     href="#"
-                    title=""
+                    title="Pricing"
                     class="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
                   >
-                    {" "}
-                    Works{" "}
+                    Pricing
                   </a>
                 </li>
-
                 <li>
                   <a
                     href="#"
-                    title=""
+                    title="FAQs"
                     class="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
                   >
-                    {" "}
-                    Career{" "}
+                    FAQs
                   </a>
                 </li>
               </ul>
@@ -149,51 +137,44 @@ const Footer = () => {
 
             <div>
               <p class="text-sm font-semibold tracking-widest text-gray-400 uppercase">
-                Help
+                Support
               </p>
 
               <ul class="mt-6 space-y-4">
                 <li>
                   <a
                     href="#"
-                    title=""
+                    title="Help Center"
                     class="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
                   >
-                    {" "}
-                    Customer Support{" "}
+                    Help Center
                   </a>
                 </li>
-
                 <li>
                   <a
                     href="#"
-                    title=""
+                    title="Contact Us"
                     class="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
                   >
-                    {" "}
-                    Delivery Details{" "}
+                    Contact Us
                   </a>
                 </li>
-
                 <li>
                   <a
                     href="#"
-                    title=""
+                    title="Terms of Service"
                     class="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
                   >
-                    {" "}
-                    Terms & Conditions{" "}
+                    Terms of Service
                   </a>
                 </li>
-
                 <li>
                   <a
                     href="#"
-                    title=""
+                    title="Privacy Policy"
                     class="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
                   >
-                    {" "}
-                    Privacy Policy{" "}
+                    Privacy Policy
                   </a>
                 </li>
               </ul>
@@ -201,7 +182,7 @@ const Footer = () => {
 
             <div class="col-span-2 md:col-span-1 lg:col-span-2 lg:pl-8">
               <p class="text-sm font-semibold tracking-widest text-gray-400 uppercase">
-                Subscribe to newsletter
+                Stay Updated
               </p>
 
               <form action="#" method="POST" class="mt-6">
@@ -231,7 +212,7 @@ const Footer = () => {
           <hr class="mt-16 mb-10 border-gray-200" />
 
           <p class="text-sm text-center text-gray-600">
-            © Copyright 2025, All Rights Reserved by CreatorDock
+            © Copyright 2025, All Rights Reserved by Creator Dock
           </p>
         </div>
       </section>

@@ -6,7 +6,7 @@ import {
   useScroll,
   useMotionValueEvent,
 } from "motion/react";
-
+import { useNavigate } from "react-router-dom";
 import React, { useRef, useState } from "react";
 import MainLogo from "../../assets/MainLogo.PNG";
 
@@ -181,7 +181,6 @@ export const NavbarLogo = () => {
       className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
     >
       <img src={MainLogo} alt="logo" width={130} height={40} />
-      
     </a>
   );
 };
@@ -194,6 +193,14 @@ export const NavbarButton = ({
   variant = "primary",
   ...props
 }) => {
+  const navigate = useNavigate();
+  const handleClick = (e) => {
+    e.preventDefault(); // Prevent default anchor behavior
+    if (href) {
+      navigate(href); // Navigate to the specified route
+    }
+  };
+
   const baseStyles =
     "px-4 py-2 rounded-md bg-white button bg-white text-black text-sm font-bold relative cursor-pointer hover:-translate-y-0.5 transition duration-200 inline-block text-center";
 
@@ -209,10 +216,11 @@ export const NavbarButton = ({
   return (
     <Tag
       href={href || undefined}
+      onClick={handleClick}
       className={cn(baseStyles, variantStyles[variant], className)}
       {...props}
     >
       {children}
     </Tag>
   );
-};
+}; 

@@ -9,17 +9,8 @@ import {
   MobileNavToggle,
   NavbarLogo,
   NavbarButton,
-} from "../components/common/resizable-navbar";
-import { MacbookScroll } from "../components/ui/macbook-scroll";
-import { HeroSectionOne } from "../components/ui/Hero";
-import { BentoGrid, BentoGridItem } from "../components/common/bento-grid";
-import { BentoGridThirdDemo } from "../components/ui/Bento";
-import { ColourfulText } from "../components/common/colourfull-text";
-import Footer from "../components/common/Footer";
-
-import { WorldMap } from "../components/ui/world-map";
-
-const Landing = () => {
+} from "./resizable-navbar";
+const Navbarcomp = () => {
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
   const navItems = [
     { name: "Home", link: "#" },
@@ -59,7 +50,6 @@ const Landing = () => {
       order: 2,
     },
   ];
-
   return (
     <div>
       <Navbar>
@@ -96,15 +86,8 @@ const Landing = () => {
           </MobileNavMenu>
         </MobileNav>
       </Navbar>
-      <HeroSectionOne />
-      <BentoGridThirdDemo />
-      <div>
-        <MacbookScroll />
-      </div>
-      <WorldMap />
-      <Footer />
     </div>
   );
 };
 
-export default Landing;
+export default Navbarcomp;
