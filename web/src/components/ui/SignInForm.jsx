@@ -7,13 +7,13 @@ import {
   IconBrandGoogle,
   IconBrandOnlyfans,
 } from "@tabler/icons-react";
-import { SignInForm } from "../ui/SignInForm";
+import { SignupFormDemo } from "../common/FormDemo";
 import { useNavigate } from "react-router-dom";
 
-export function SignupFormDemo(props) {
-  const navigate = useNavigate();
+export function SignInForm(props) {
+  const [isSigninUp, setIsSignUp] = React.useState(false);
   const { role } = props;
-  const [isSigningIn, setIsSigningIn] = React.useState(false);
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted");
@@ -24,14 +24,13 @@ export function SignupFormDemo(props) {
       navigate("/admin/dashboard");
     }
   };
-  if (isSigningIn) {
-    return <SignInForm role={role} />;
+  if (isSigninUp) {
+    return <SignupFormDemo role={role} />;
   }
-
-  const handleSwitchSignin = (e) => {
+  const handleSwitchSignUp = (e) => {
     e.preventDefault();
-    console.log("Switch to SignIn");
-    setIsSigningIn(true);
+    console.log("Switch to SignUp");
+    setIsSignUp(true);
   };
   return (
     <div className=" shadow-input mx-auto w-full max-w-md rounded-none bg-white p-10  mt-20 md:rounded-2xl md:p-8 dark:bg-black">
@@ -39,15 +38,9 @@ export function SignupFormDemo(props) {
         Welcome to CreatorDock
       </h2>
       <p className="mt-2 max-w-sm text-sm text-neutral-600 dark:text-neutral-300">
-        If you don't have an {role} account, you can sign up for free.
+        Hello {role} SignIn to your account.
       </p>
       <form className="my-8" onSubmit={handleSubmit}>
-        <div className="mb-4 flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2">
-          <LabelInputContainer>
-            <Label htmlFor="firstname">Username</Label>
-            <Input id="firstname" placeholder="Tyler" type="text" />
-          </LabelInputContainer>
-        </div>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="email">Email Address</Label>
           <Input id="email" placeholder="creator@gmail.com" type="email" />
@@ -65,9 +58,9 @@ export function SignupFormDemo(props) {
           <BottomGradient />
         </button>
         <p className="mt-2 max-w-sm text-sm text-neutral-600 dark:text-neutral-300">
-          Already having an {role} account?{" "}
-          <span onClick={handleSwitchSignin} className="text-blue-500">
-            SignIn
+          Does'nt have an {role} account?{" "}
+          <span onClick={handleSwitchSignUp} className="text-blue-500">
+            SignUp
           </span>
           .
         </p>

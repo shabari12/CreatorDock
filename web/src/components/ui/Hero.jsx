@@ -1,7 +1,9 @@
 import { motion } from "motion/react";
 import { Meteors } from "./meteors";
+import { useNavigate } from "react-router-dom";
 
 export function HeroSectionOne() {
+  const navigate = useNavigate();
   return (
     <div className="pb-0">
       <Meteors />
@@ -56,7 +58,12 @@ export function HeroSectionOne() {
             }}
             className="relative z-10 mt-8 flex flex-wrap items-center justify-center gap-4"
           >
-            <button className="w-60 transform rounded-lg bg-black px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200">
+            <button
+              onClick={() => {
+                navigate("/auth");
+              }}
+              className="w-60 transform rounded-lg bg-black px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
+            >
               Get Started
             </button>
             <button className="w-60 transform rounded-lg border border-gray-300 bg-white px-6 py-2 font-medium text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-100 dark:border-gray-700 dark:bg-black dark:text-white dark:hover:bg-gray-900">
