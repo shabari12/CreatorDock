@@ -1,9 +1,10 @@
 import React from "react";
+import { MainSidebar } from "../components/common/MainSidebar";
 
 const AdminDashboard = () => {
   return (
     <div>
-      <h1>Admin Dash</h1>
+      <MainSidebar />
     </div>
   );
 };
