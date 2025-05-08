@@ -9,26 +9,41 @@ import {
 import { motion } from "motion/react";
 import { cn } from "../../lib/Utils";
 import MainLogo from "../../assets/MainLogo.PNG";
-import AdminDash from "../ui/AdminDash";
+import MyImg from "../../assets/Myimg.jpg";
+import CreateSpace from "./CreateSpace";
+import HomeDash from "../ui/HomeDash";
 export function MainSidebar() {
+  const [activeComponent, setActiveComponent] = useState("AdminDash");
+  const renderComponent = () => {
+    switch (activeComponent) {
+      case "AdminDash":
+        return <HomeDash />;
+      case "Profile":
+        return <div>Profile</div>;
+      case "CreateSpace":
+        return <CreateSpace />;
+      default:
+        return <HomeDash />;
+    }
+  };
   const links = [
     {
       label: "Dashboard",
-      href: "#",
+      onClick: () => setActiveComponent("AdminDash"),
       icon: (
         <IconBrandTabler className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
       ),
     },
     {
       label: "Profile",
-      href: "#",
+      onClick: () => setActiveComponent("Profile"),
       icon: (
         <IconUserBolt className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
       ),
     },
     {
-      label: "Settings",
-      href: "#",
+      label: "Create-Space",
+      onClick: () => setActiveComponent("CreateSpace"),
       icon: (
         <IconSettings className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
       ),
@@ -56,30 +71,34 @@ export function MainSidebar() {
             {open ? <Logo /> : <LogoIcon />}
             <div className="mt-8 flex flex-col gap-2">
               {links.map((link, idx) => (
-                <SidebarLink key={idx} link={link} />
+                <button
+                  key={idx}
+                  onClick={link.onClick}
+                  className="flex items-center gap-2 p-2 text-left text-neutral-700 dark:text-neutral-200 hover:bg-gray-200 dark:hover:bg-neutral-700 rounded-md"
+                >
+                  {link.icon}
+                  <span>{link.label}</span>
+                </button>
               ))}
             </div>
           </div>
           <div>
-            <SidebarLink
-              link={{
-                label: "",
-                href: "#",
-                icon: (
-                  <img
-                    src="https://assets.aceternity.com/manu.png"
-                    className="h-7 w-7 shrink-0 rounded-full"
-                    width={50}
-                    height={50}
-                    alt="Avatar"
-                  />
-                ),
-              }}
-            />
+            <button
+              onClick={() => console.log("Avatar clicked")}
+              className="flex items-center gap-2 p-2 hover:bg-gray-200 dark:hover:bg-neutral-700 rounded-md"
+            >
+              <img
+                src={MyImg}
+                className="h-7 w-7 shrink-0 rounded-full"
+                width={50}
+                height={50}
+                alt="Avatar"
+              />
+            </button>
           </div>
         </SidebarBody>
       </Sidebar>
-      <AdminDash />
+      <div>{renderComponent()}</div>
     </div>
   );
 }
